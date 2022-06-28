@@ -1,75 +1,89 @@
 import { useNavigation } from '@react-navigation/native';
-import { ReactNode, useEffect, useRef } from 'react';
-
-import { StyleSheet, Text, View } from 'react-native';
-import { MAPS_API_KEY } from 'react-native-dotenv';
+import React from 'react';
 import {
-  GooglePlacesAutocomplete,
-  GooglePlacesAutocompleteRef,
-} from 'react-native-google-places-autocomplete';
-import { useDispatch } from 'react-redux';
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import { Icon } from 'react-native-elements';
 import tailwind from 'twrnc';
-import { setDestination } from '../../../redux/slices/navSlice';
+import { RecentRides } from '../../../data/mock';
 
-interface ChooseRideProps {
-  children: ReactNode;
-}
+import SearchInputAutocomplete from '../../SearchInputAutocomplete';
 
 function ChooseRide() {
-  const dispatch = useDispatch();
   const navigation = useNavigation();
-  const AutoCompleteRef = useRef<GooglePlacesAutocompleteRef>(null);
-
-  useEffect(() => {
-    if (!AutoCompleteRef.current) return;
-    AutoCompleteRef.current.blur();
-  }, []);
-
   return (
-    <View style={tailwind`flex-1 bg-white`}>
-      <Text style={tailwind`text-center py-5 text-xl font-bold`}>
+    <View style={tailwind`flex-1 bg-white p-5`}>
+      <View
+        style={tailwind`flex self-center w-7 h-1 bg-gray-200 rounded-full`}
+      />
+      <Text style={tailwind`text-center py-3 text-xl font-bold`}>
         Good Morning, Rafo!
       </Text>
       <View>
-        <GooglePlacesAutocomplete
-          ref={AutoCompleteRef}
-          styles={styles}
-          placeholder="Where to?"
-          minLength={2}
-          debounce={400}
-          nearbyPlacesAPI="GooglePlacesSearch"
-          query={{ key: MAPS_API_KEY }}
-          fetchDetails
-          enablePoweredByContainer={false}
-          onPress={(data, details = null) => {
-            dispatch(
-              setDestination({
-                location: details?.geometry.location,
-                description: data.description,
-              })
-            );
-            navigation.navigate('ChooseRideType');
-          }}
+        <KeyboardAvoidingView
+          style={tailwind``}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 300 : -0}
+        >
+          <SearchInputAutocomplete
+            iconName="search"
+            placeholder="Where to?"
+            type="destination"
+          />
+        </KeyboardAvoidingView>
+      </View>
+      <View>
+        <FlatList
+          data={RecentRides}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={tailwind`flex flex-row items-center mt-2`}>
+              <View style={tailwind`-ml-3`}>
+                <Icon
+                  name="clock"
+                  type="feather"
+                  color="gray"
+                  size={30}
+                  tvParallaxProperties={undefined}
+                  style={tailwind`p-2 rounded-full ml-2 mt-2 `}
+                />
+              </View>
+              <View style={tailwind`flex-1 border-b-2 border-gray-100 p-2`}>
+                <Text style={tailwind`text-base font-bold`}>{item.title}</Text>
+                <Text style={tailwind`text-sm text-gray-500`}>
+                  {item.address}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
         />
       </View>
+      {/* <View style={tailwind`flex`}>
+        <TouchableOpacity
+          style={tailwind`flex flex-row h-14 w-full items-center justify-center rounded-full bg-black`}
+          onPress={() => navigation.navigate('ChooseRideType')}
+        >
+          <Icon
+            name="directions-car"
+            type="material"
+            color="white"
+            size={20}
+            tvParallaxProperties={undefined}
+          />
+          <Text
+            style={tailwind`text-center text-white text-lg font-medium ml-3`}
+          >
+            Ride
+          </Text>
+        </TouchableOpacity>
+      </View> */}
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    flex: 0,
-  },
-  textInput: {
-    fontSize: 18,
-    backgroundColor: '#dddddf',
-  },
-  textInputContainer: {
-    paddingHorizontal: 20,
-    paddingBottom: 0,
-  },
-});
 
 export default ChooseRide;
