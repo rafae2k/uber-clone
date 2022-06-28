@@ -11,16 +11,16 @@
 <br />
 <div align="center">
   <a href="https://github.com/rafae2k/uber-clone">
-    <img src="docs/assets/uber-logo.jpg" alt="Uber clone logo" height="100">
+    <img src="./docs/assets/uber-logo.jpeg" alt="Uber clone logo" height="100">
 </a>
 </br>
 </br>
 
   <p align="center">
-    A first experimental project to clone Uber's Mobile App using React Native, Expo and Google Places API.
+    A first experimental Mobile project cloning Uber's Mobile App using React Native, Expo and Google Places API.
     <br />
     <br />
-    <a href="http://uber-clone.vercel.app/">View Live</a>
+    <a href="https://snack.expo.dev/@rafae2k/rafo---uber-clone">View Live</a>
     ·
     <a href="https://github.com/rafae2k/uber-clone/issues">Report Bug</a>
     ·
@@ -67,7 +67,9 @@ In this project I built my first multiplataform mobile app using React Native an
 
 - You are able to see the approximate time of arrival and estimated cost of the trip.
 
-[![Product Name Screen Shot][product-screenshot]](https://uber-clone.vercel.app/)
+<br>
+
+<img src="./docs/assets/app.gif" alt="Uber clone app" height="500" style="margin: auto" />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,7 +93,9 @@ This blog was build with JAMstack architecture, fast, reliable and SEO focused.
 
 Expo Snack - Test the app on your on web or on your phone.
 
-[![Expo Snack][expo-snack-screenshot]](https://snack.expo.dev/@rafae2k/rafo---uber-clone)
+[Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/rafo---uber-clone)
+
+- It can run on Web emulator of Expo Snack only on iOS, Android or on your device reading the QR code on Expo Go App.
 
 ### Prerequisites
 
