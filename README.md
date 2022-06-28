@@ -61,9 +61,9 @@ In this project I built my first multiplataform mobile app using React Native an
 
 ### Features
 
-- You can search for places using the Google Places API and see the details of the place.
+- You can search for places using the Google Places API and see the place details.
 
-- You can also see the route between the two places.
+- You can also see the route drawed in the map between the origin and destination selected.
 
 - You are able to see the approximate time of arrival and estimated cost of the trip.
 
@@ -75,7 +75,7 @@ In this project I built my first multiplataform mobile app using React Native an
 
 ### Built With
 
-This blog was build with JAMstack architecture, fast, reliable and SEO focused.
+This App was build with React architecture, fast and reliable.
 
 - [Typescript](https://www.typescriptlang.org/)
 - [React Native](https://reactnative.dev/)
