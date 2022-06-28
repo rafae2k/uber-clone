@@ -10,7 +10,6 @@ const Map = () => {
     <KeyboardAvoidingView
       style={tailwind`flex-1`}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      // keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
       <View style={tailwind`h-full`}>
         <View style={tailwind`h-1/2`}>
