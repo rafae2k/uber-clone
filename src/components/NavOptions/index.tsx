@@ -19,10 +19,6 @@ const data = [
   },
 ];
 
-interface NavOptionsProps {
-  children: ReactNode;
-}
-
 function NavOptions() {
   const navigation = useNavigation();
 
@@ -43,12 +39,8 @@ function NavOptions() {
               style={{ width: 120, height: 120, resizeMode: 'contain' }}
               source={item.icon}
             />
-            <View
-              style={tailwind`flex flex-row items-center border-red-500 border`}
-            >
-              <Text
-                style={tailwind`mt-2 font-bold text-lg border border-red-500`}
-              >
+            <View style={tailwind`flex flex-row items-center  flex-shrink`}>
+              <Text style={tailwind`mt-2 font-bold text-lg flex-shrink`}>
                 {item.title}
               </Text>
               <Icon
