@@ -1,14 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ReactNode } from 'react';
-
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import tailwind from 'twrnc';
+
 import ChooseRide from './ChooseRide';
 import RideType from './RideType';
-
-interface RideProps {
-  children: ReactNode;
-}
 
 export type RideStackParamList = {
   ChooseRide: undefined;
@@ -19,7 +15,7 @@ function Ride() {
   const RideStack = createNativeStackNavigator<RideStackParamList>();
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={tailwind`flex-1`}>
       <RideStack.Navigator>
         <RideStack.Screen
           name="ChooseRide"
@@ -39,7 +35,5 @@ function Ride() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default Ride;
