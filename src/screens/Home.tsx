@@ -1,64 +1,71 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {
+  FlatList,
   Image,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import { MAPS_API_KEY } from 'react-native-dotenv';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import {
-  KeyboardAwareFlatList,
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
-import { useDispatch } from 'react-redux';
+import { Icon } from 'react-native-elements';
 import tailwind from 'twrnc';
 
 import NavOptions from '../components/NavOptions';
-import { setDestination, setOrigin } from '../redux/slices/navSlice';
+import SearchInputAutocomplete from '../components/SearchInputAutocomplete';
+import { RecentRides } from '../data/mock';
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
   return (
     <SafeAreaView style={tailwind`w-full h-full bg-white`}>
-      <KeyboardAvoidingView
-        style={tailwind`flex-1`}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 300 : -0}
-      >
-        <View style={tailwind`p-5`}>
-          <Image
-            style={{ width: 100, height: 100, resizeMode: 'contain' }}
-            source={require('../../assets/images/logo.png')}
-          />
-
-          <NavOptions />
-          <GooglePlacesAutocomplete
-            placeholder="Where to?"
-            minLength={2}
-            nearbyPlacesAPI="GooglePlacesSearch"
-            debounce={400}
-            query={{ key: MAPS_API_KEY }}
-            fetchDetails
-            enablePoweredByContainer={false}
-            styles={{ container: { flex: 0 }, textInput: { fontSize: 18 } }}
-            onPress={(data, details = null) => {
-              dispatch(
-                setOrigin({
-                  location: details?.geometry.location,
-                  description: data.description,
-                })
-              );
-              dispatch(setDestination(null));
-              navigation.navigate('Map');
-            }}
-          />
-        </View>
-      </KeyboardAvoidingView>
+      <View style={tailwind`flex-1`}>
+        <KeyboardAvoidingView
+          style={tailwind`flex-1`}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 300 : -0}
+        >
+          <View style={tailwind`p-5`}>
+            <Image
+              style={{ width: 100, height: 100, resizeMode: 'contain' }}
+              source={require('../../assets/images/logo.png')}
+            />
+            <NavOptions />
+            <SearchInputAutocomplete
+              iconName="search"
+              placeholder="Where to?"
+              type="origin"
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </View>
+      <View>
+        <FlatList
+          style={tailwind`px-5`}
+          data={RecentRides}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity style={tailwind`flex flex-row items-center mt-2`}>
+              <View style={tailwind`-ml-3`}>
+                <Icon
+                  name="clock"
+                  type="feather"
+                  color="gray"
+                  size={30}
+                  tvParallaxProperties={undefined}
+                  style={tailwind`p-2 rounded-full ml-2 mt-2 `}
+                />
+              </View>
+              <View style={tailwind`flex-1 border-b-2 border-gray-100 p-2`}>
+                <Text style={tailwind`text-base font-bold`}>{item.title}</Text>
+                <Text style={tailwind`text-sm text-gray-500`}>
+                  {item.address}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </View>
     </SafeAreaView>
   );
 };
