@@ -63,7 +63,7 @@ In this project I built my first multiplataform mobile app using React Native an
 
 - You can search for places using the Google Places API and see the place details.
 
-- You can also see the route drawed in the map between the origin and destination selected.
+- You can also see the route drawed in the map between the selected origin and destination.
 
 - You are able to see the approximate time of arrival and estimated cost of the trip.
 
@@ -95,7 +95,7 @@ Expo Snack - Test the app on your on web or on your phone.
 
 [Click Here to run the app on Expo Snack](https://snack.expo.dev/@rafae2k/rafo---uber-clone)
 
-- It can run on Web emulator of Expo Snack only on iOS, Android or on your device reading the QR code on Expo Go App.
+- You can run on Web emulator of Expo Snack only on iOS or Android (Web doesn't work yet for this project) or on your device reading the QR code on Expo Go App.
 
 ### Prerequisites
 
@@ -141,7 +141,7 @@ yarn global add expo-cli
 - [x] Implement the search with autocomplete feature using the Google Places API
 - [x] Implement redux state
 - [x] Use device location to get the current location
-- [ ] Fix list of places avoiding the while keyboard open
+- [ ] Fix list of places space while keyboard open on `ChooseRide` component
 
 See the [open issues](https://github.com/rafae2k/uber-clone/issues) for a full list of proposed features (and known issues).
 
